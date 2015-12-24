@@ -1,0 +1,42 @@
+
+<template name = "postList">
+
+    <h2 class="sub-header">传感器列表</h2>
+
+    <!--<a href="" class="button SensorValue"></a> -->
+    <!--<button id="" class="button">add value </button>-->
+    <button id='SensorValue' class='btn btn-small btn-primary'>add value</button>
+
+    <!--<a href="pathFor 'createSensor'}}" class="discuss btn btn-default">新建</a>-->
+    <!--<a href="pathFor 'rSensor'}}" class="discuss btn btn-default">post data</a>-->
+    <!--<a href="/posts/{{_id}}" class="discuss btn btn-default">新建</a>-->
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>URL</th>
+                <th>详情</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                 {{#each sensors}}
+                     {{> sensorItem}}
+                 {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+
+</template>
+
+<template name = "sensorItem">
+    <tr>
+        <td>{{_id}}</td>
+        <td>{{url}}</td>
+        <!--<td><a href=" pathFor 'SensorDetail' " class="button"> Detail </a></td>-->
+    <!--<a href="">Edit</a>-->
+    </tr>
+</template>

@@ -1,0 +1,53 @@
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+
+
+
+{{>postList}}
+
+
+<!--table-striped-->
+<div class="table-responsive">
+    <table class="table " style="height: 500px;width: 300px">
+        <thead>
+
+        <tr>
+            <th>nodeid</th>
+            <th>通道值</th>
+            <th>value1</th>
+            <th>value2</th>
+            <th>流水号</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {{>SensorMsg}}
+
+        </tbody>
+    </table>
+
+
+
+
+</div>
+</body>
+
+
+<template name="SensorMsg">
+
+    {{#each messages}}
+        <tr>
+            <td>{{nodeid}}</td>
+            <td>{{tongdao}}</td>
+            <td>{{value1}}</td>
+            <td>{{value2}}</td>
+            <td>{{idNumber}}</td>
+        </tr>
+    {{/each}}
+
+</template>
