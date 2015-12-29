@@ -6,7 +6,7 @@
 Meteor.startup(function () {
 
     Cylon.robot({
-        name: 'Number Six',
+        name: 'IOT',
         description: 'Description is optional...',
         runStepper:false,
 
@@ -60,9 +60,9 @@ Meteor.startup(function () {
         },
         commands: function () {
             return {
-                'Toggle red Led': this.redLed,
-                'Toggle yellow Led': this.yellowLed,
-                'Toggle all': this.toggleAll,
+                //'Toggle red Led': this.redLed,
+                //'Toggle yellow Led': this.yellowLed,
+                //'Toggle all': this.toggleAll,
                 'startStepper': this.startStepper,
                 'closeStepper': this.closeStepper
             };
@@ -97,11 +97,17 @@ Meteor.startup(function () {
             my.light.on('lowerLimit', function(val) {
                 console.log("Lower limit reached!");
                 console.log('Analog value => ', val);
+
+                my.devices.stepper.setSpeed(4000);
+                my.devices.stepper.step(-2000);
             });
 
             my.light.on('upperLimit', function(val) {
                 console.log("Upper limit reached!");
                 console.log('Analog value => ', val);
+
+                my.devices.stepper.setSpeed(4000);
+                my.devices.stepper.step(2000);
             });
         }
 

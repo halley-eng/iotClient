@@ -37,7 +37,7 @@ Meteor.methods({
         if (_.isObject(Cylon)) {
             //return Cylon.robots[toasterName].commands[command]();
         //    Cylon.robots[toasterName]   .call
-            return Cylon.robots["Number Six"].commands.startStepper();
+            return Cylon.robots["IOT"].commands.startStepper();
         }
     }
 
