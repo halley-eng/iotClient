@@ -4,6 +4,7 @@
 
 
 
+
 Template.SensorMsg.helpers({
     messages:function(){
         return Message.find({},{

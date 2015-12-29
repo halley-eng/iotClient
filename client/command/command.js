@@ -1,5 +1,3 @@
-'use strict';
-
 Template.capricaHomeland.created = function () {
     this.occupiedCapricaData = Meteor.subscribe('occupiedCapricaData');
 };

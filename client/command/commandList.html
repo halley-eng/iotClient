@@ -1,0 +1,48 @@
+
+
+
+
+
+<template name="capricaHomeland">
+
+    {{#if occupiedCapricaDataReady}}
+        {{#each cylons}}
+            {{> capricaHomelandCylon}}
+        {{/each}}
+    {{else}}
+        <div class="loading">
+            Scanning for Cylons...
+        </div>
+    {{/if}}
+
+</template>
+
+<template name="capricaHomelandCylon">
+
+    <h1>{{name}}</h1>
+    <p>{{description}}</p>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+
+            <tr>
+
+                {{#each commands}}
+                    {{> capricaHomelandCylonCommand}}
+                {{/each}}
+
+            </tr>
+
+        </table>
+    </div>
+
+</template>
+
+
+<template name = "capricaHomelandCylonCommand">
+
+    <td>
+        <button  class='js-cylon-command btn btn-small btn-primary'>{{this}}</button>
+    </td>
+
+</template>

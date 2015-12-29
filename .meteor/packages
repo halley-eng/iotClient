@@ -22,4 +22,7 @@ twbs:bootstrap
 msavin:mongol
 froatsnook:sleep
 random
-llwoll:arduino-cylon@0.0.1
+llwoll:arduino-cylon
+iron:router
+babrahams:constellation
+juliancwirko:s-alert

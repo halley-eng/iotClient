@@ -1,41 +1,50 @@
 
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+<template name="front">
 
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>iot</title>
 
-{{> capricaHomeland class="my-custom-class" defaultTheme=true}}
+    </head>
+    <body>
 
-{{>postList}}
+    <!--{> capricaHomeland class="my-custom-class" defaultTheme=true}-->
 
-
-<!--table-striped-->
-<div class="table-responsive">
-    <table class="table " style="height: 500px;width: 300px">
-        <thead>
-
-        <tr>
-            <th>nodeid</th>
-            <th>通道值</th>
-            <th>value1</th>
-            <th>value2</th>
-            <th>流水号</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        {{>SensorMsg}}
-
-        </tbody>
-    </table>
+    {{>capricaHomeland}}
 
 
+    {{>postList}}
 
 
-</div>
-</body>
+    <!--table-striped-->
+    <div class="table-responsive">
+        <table class="table " style="height: 500px;width: 300px">
+            <thead>
+
+            <tr>
+                <th>nodeid</th>
+                <th>通道值</th>
+                <th>value1</th>
+                <th>value2</th>
+                <th>流水号</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {{>SensorMsg}}
+
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+    </body>
+
+</template>
+
+
 
 
 <template name="SensorMsg">

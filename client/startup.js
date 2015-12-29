@@ -1,4 +1,7 @@
-'use strict';
+/**
+ * Created by zysd on 15/12/29.
+ */
+
 
 Meteor.startup(function () {
     Meteor.call('scanForToasters');
@@ -10,3 +13,5 @@ Meteor.startup(function () {
         timeout: 3000
     });
 });
+
+Meteor.subscribe('occupiedCapricaData');

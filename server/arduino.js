@@ -1,23 +1,24 @@
-/**
- * Created by zysd on 15/12/27.
- */
-
-
+///**
+// * Created by zysd on 15/12/27.
+// */
+//
+//
 Meteor.startup(function () {
 
     Cylon.robot({
         name: 'Number Six',
         description: 'Description is optional...',
+        runStepper:false,
 
         connections: {
-            arduino: { adaptor: 'firmata', port: '/dev/cu.usbmodem1421' }
+            arduino: { adaptor: 'firmata-llwoll', port: '/dev/cu.usbmodem1421' }
         },
-
+        //,module: 'stepper'
         devices: {
-            redLed: { driver: 'led', pin: 10 },
+            redLed: { driver: 'led', pin: 5 },
             yellowLed: { driver: 'led', pin: 12 },
             light: { driver: 'analog-sensor', pin: 2, lowerLimit: 100, upperLimit: 750 },
-            stepper:{driver:'stepper',pin1:8,pin2:9,pin3:10,pin4:11,module: 'stepper'}
+            stepper:{driver:'stepper',pin1:8,pin2:9,pin3:10,pin4:11}
         },
 
         redLed: function () {
@@ -35,12 +36,35 @@ Meteor.startup(function () {
             this.devices.yellowLed.toggle();
             return 'Cylon ' + this.name + ' toggles red and yellow led';
         },
+        startStepper:function(){
 
+            console.log("open the door----------------");
+            this.runStepper = true;
+
+            this.devices.stepper.setSpeed(4000);
+            this.devices.stepper.step(2000);
+
+            //every((1).microseconds(),function(){
+            //
+            //    if(!this.runStepper) return  "start the stepper failture";;
+            //    this.devices.stepper.setSpeed(4000);
+            //    this.devices.stepper.step(5);
+            //    //console.log("stepper");
+            //    console.log("one microseconds");
+            //});
+            return 'Cylon ' + this.name + "start the stepper";
+        },
+        closeStepper:function(){
+           this.runStepper = false;
+            return 'Cylon ' + this.name + "close the stepper";
+        },
         commands: function () {
             return {
                 'Toggle red Led': this.redLed,
                 'Toggle yellow Led': this.yellowLed,
-                'Toggle all': this.toggleAll
+                'Toggle all': this.toggleAll,
+                'startStepper': this.startStepper,
+                'closeStepper': this.closeStepper
             };
         },
         work: function (my) {
@@ -59,11 +83,15 @@ Meteor.startup(function () {
             });
 
             //my.devices.stepper.on();
+            //this.startStepper();
 
             every((1).microseconds(),function(){
-                my.devices.stepper.setSpeed(1000);
-                my.devices.stepper.step(100);
+
+                if(!this.runStepper) return;
+                my.devices.stepper.setSpeed(4000);
+                my.devices.stepper.step(5);
                 //console.log("stepper");
+                console.log("one microseconds");
             });
 
             my.light.on('lowerLimit', function(val) {
