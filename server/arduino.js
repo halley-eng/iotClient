@@ -11,7 +11,7 @@ Meteor.startup(function () {
         runStepper:false,
 
         connections: {
-            arduino: { adaptor: 'firmata-llwoll', port: '/dev/cu.usbmodem1421' }
+            arduino: { adaptor: 'firmata-llwoll', port: '/dev/cu.usbmodem1461' }
         },
         //,module: 'stepper'
         devices: {
@@ -41,7 +41,7 @@ Meteor.startup(function () {
             console.log("open the door----------------");
             this.runStepper = true;
 
-            this.devices.stepper.setSpeed(4000);
+            this.devices.stepper.setSpeed(3000);
             this.devices.stepper.step(2000);
 
             //every((1).microseconds(),function(){

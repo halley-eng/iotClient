@@ -60,7 +60,7 @@ lai:collection-extensions@0.1.4
 lai:ddp-inspector@1.1.9
 launch-screen@1.0.4
 livedata@1.0.15
-llwoll:arduino-cylon@0.0.3
+llwoll:arduino-cylon@0.0.5
 logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
