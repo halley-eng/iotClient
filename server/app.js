@@ -3,11 +3,7 @@
  */
 
 
-Meteor.startup(function(){
 
-
-
-});
 
 //sensorValueInsert('5U7S0',Random.fraction()*20+50);
 

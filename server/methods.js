@@ -34,10 +34,18 @@ Meteor.methods({
         }
     },
     toastersCommand: function (command, toasterName) {
+        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         if (_.isObject(Cylon)) {
-            //return Cylon.robots[toasterName].commands[command]();
+
+            console.log("################################");
+            return Cylon.robots[toasterName].commands[command.valueOf()].call(Cylon.robots[toasterName]);
+            //var method = Cylon.robots[toasterName].commands[command]();
+            //return method;
+
+
+
         //    Cylon.robots[toasterName]   .call
-            return Cylon.robots["IOT"].commands.startStepper();
+        //    return Cylon.robots["IOT"].commands.startStepper();
         }
     }
 

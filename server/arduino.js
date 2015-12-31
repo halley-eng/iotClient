@@ -16,7 +16,7 @@ Meteor.startup(function () {
         //,module: 'stepper'
         devices: {
             redLed: { driver: 'led', pin: 5 },
-            yellowLed: { driver: 'led', pin: 12 },
+            yellowLed: { driver: 'led', pin: 13 },
             light: { driver: 'analog-sensor', pin: 2, lowerLimit: 100, upperLimit: 750 },
             stepper:{driver:'stepper',pin1:8,pin2:9,pin3:10,pin4:11}
         },
@@ -61,7 +61,7 @@ Meteor.startup(function () {
         commands: function () {
             return {
                 //'Toggle red Led': this.redLed,
-                //'Toggle yellow Led': this.yellowLed,
+                'Toggle yellow Led': this.yellowLed,
                 //'Toggle all': this.toggleAll,
                 'startStepper': this.startStepper,
                 'closeStepper': this.closeStepper

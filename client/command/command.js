@@ -20,7 +20,7 @@ Template.capricaHomelandCylonCommand.events({
         e.preventDefault();
         var command = this;
         var toasterName = Template.parentData(1).name;
-        Meteor.call('toastersCommand', command, toasterName, function (err, result) {
+        Meteor.call('toastersCommand', command.valueOf(), toasterName, function (err, result) {
             if (!err && result) {
                 console.log('Toaster response: ' + result);
                 sAlert.info(result);

@@ -10,3 +10,4 @@ remote.subscribe('sensor', function() {
     var items = SensorCollection.find();
     console.log(items.count());  // get 1
 });
+

@@ -31,7 +31,7 @@ Template.postList.events({
 
                 var random = Random.fraction()*200+500;
                 var random1 =Math.round(random);
-                Meteor.call('sensorValueInsert','DriTL',random1);
+                Meteor.call('sensorValueInsert','bSYQL',random1);
 
     }
 });

@@ -15,4 +15,16 @@ if (Meteor.isServer) {
             return false;
         }
     });
+    ControlDevice.allow({
+        insert: function() {
+            return false;
+        },
+        update: function() {
+            return false;
+        },
+        remove: function() {
+            return false;
+        }
+    });
 }
+
