@@ -42,7 +42,7 @@ Meteor.startup(function () {
             this.runStepper = true;
 
             this.devices.stepper.setSpeed(3000);
-            this.devices.stepper.step(2000);
+            this.devices.stepper.step(500);
 
             //every((1).microseconds(),function(){
             //
@@ -97,20 +97,25 @@ Meteor.startup(function () {
             my.light.on('lowerLimit', function(val) {
                 console.log("Lower limit reached!");
                 console.log('Analog value => ', val);
+                my.devices.yellowLed.toggle();
 
-                my.devices.stepper.setSpeed(4000);
-                my.devices.stepper.step(-2000);
+
             });
 
             my.light.on('upperLimit', function(val) {
                 console.log("Upper limit reached!");
                 console.log('Analog value => ', val);
 
-                my.devices.stepper.setSpeed(4000);
-                my.devices.stepper.step(2000);
+                my.devices.yellowLed.toggle();
+
             });
         }
 
     }).start();
 
 });
+
+//my.devices.stepper.setSpeed(4000);
+//my.devices.stepper.step(-2000);
+//my.devices.stepper.setSpeed(4000);
+//my.devices.stepper.step(2000);
