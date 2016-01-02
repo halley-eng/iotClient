@@ -41,9 +41,12 @@ Meteor.startup(function () {
             console.log("open the door----------------");
             this.runStepper = true;
 
-            this.devices.stepper.setSpeed(3000);
-            this.devices.stepper.step(500);
+            for(var i = 0;i<2;i++){
 
+                this.devices.stepper.setSpeed(3000);
+                this.devices.stepper.step(3000);
+
+            }
             //every((1).microseconds(),function(){
             //
             //    if(!this.runStepper) return  "start the stepper failture";;
