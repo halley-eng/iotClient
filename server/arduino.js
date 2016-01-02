@@ -3,7 +3,11 @@
 // */
 //
 //
-Meteor.startup(function () {
+Meteor.startup(
+
+
+
+        function () {
 
     Cylon.robot({
         name: 'IOT',
@@ -36,7 +40,7 @@ Meteor.startup(function () {
             this.devices.yellowLed.toggle();
             return 'Cylon ' + this.name + ' toggles red and yellow led';
         },
-        startStepper:function(){
+        startStepper: Meteor.bindEnvironment(function(){
 
             console.log("open the door----------------");
             this.runStepper = true;
@@ -56,7 +60,7 @@ Meteor.startup(function () {
             //    console.log("one microseconds");
             //});
             return 'Cylon ' + this.name + "start the stepper";
-        },
+        }),
         closeStepper:function(){
            this.runStepper = false;
             return 'Cylon ' + this.name + "close the stepper";
@@ -70,10 +74,22 @@ Meteor.startup(function () {
                 'closeStepper': this.closeStepper
             };
         },
-        work: function (my) {
+        work: Meteor.bindEnvironment( function (my) {
             var analogValue = 0;
-            every((1).second(),function(){
+            every((1).second(),Meteor.bindEnvironment(  function(){
                 analogValue = my.light.analogRead();
+
+                Meteor.call('sensorValueInsert','bSYQL',analogValue);
+                //sensorValueInsert('bSYQL',analogValue);
+                //var sensorValue = {
+                //    sensor:'bSYQL',
+                //    value:analogValue,
+                //    createdAt:new Date
+                //};
+                //var id = SensorValueCollection.insert(sensorValue);
+                //console.log('the id is'+id);
+
+
                 console.log('Analog value =>',analogValue);
                 //my.redLed.turn_on();
                 my.devices.redLed.toggle();
@@ -83,7 +99,7 @@ Meteor.startup(function () {
                 //
                 console.log("stepper");
 
-            });
+            }), function( error) {console.log( error);} );
 
             //my.devices.stepper.on();
             //this.startStepper();
@@ -112,13 +128,30 @@ Meteor.startup(function () {
                 my.devices.yellowLed.toggle();
 
             });
-        }
+        }, function( error) {console.log( error);})
 
     }).start();
 
-});
+}
+    //, function( error) {console.log( error);}
+
+
+);
 
 //my.devices.stepper.setSpeed(4000);
 //my.devices.stepper.step(-2000);
 //my.devices.stepper.setSpeed(4000);
 //my.devices.stepper.step(2000);
+
+
+sensorValueInsert = function(url,svalue){
+
+
+    var sensorValue = {
+        sensor:url,
+        value:svalue,
+        createdAt:new Date
+    };
+    var id = SensorValueCollection.insert(sensorValue);
+    console.log('the id is'+id);
+}

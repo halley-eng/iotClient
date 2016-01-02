@@ -12,7 +12,10 @@ Meteor.methods({
             value:svalue,
             createdAt:new Date
         };
-        var id = SensorValueCollection.insert(sensorValue);
+        var id = SensorValueCollection.insert(sensorValue,function( error, result) {
+            if ( error ) console.log ( error ); //info about what went wrong
+            if ( result ) console.log ( result ); //the _id of new object if successful
+        });
         console.log('the id is'+id);
     },
     scanForToasters: function () {

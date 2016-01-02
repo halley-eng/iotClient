@@ -24,15 +24,15 @@ if (flag<5){
 
 
 
-function sensorValueInsert(url,svalue){
-
-    var sensorValue = {
-        sensor:url,
-        value:svalue,
-        createdAt:new Date
-    };
-    SensorValueCollection.insert(sensorValue);
-};
+//function sensorValueInsert(url,svalue){
+//
+//    var sensorValue = {
+//        sensor:url,
+//        value:svalue,
+//        createdAt:new Date
+//    };
+//    SensorValueCollection.insert(sensorValue);
+//};
 
 
 
