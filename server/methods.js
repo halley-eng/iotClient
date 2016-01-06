@@ -6,7 +6,6 @@
 Meteor.methods({
     sensorValueInsert : function(url,svalue){
 
-
         var sensorValue = {
             sensor:url,
             value:svalue,

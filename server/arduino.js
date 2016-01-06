@@ -7,7 +7,7 @@ Meteor.startup(
 
 
 
-        function () {
+function () {
 
     Cylon.robot({
         name: 'IOT',
@@ -40,27 +40,21 @@ Meteor.startup(
             this.devices.yellowLed.toggle();
             return 'Cylon ' + this.name + ' toggles red and yellow led';
         },
-        startStepper: Meteor.bindEnvironment(function(){
+        startStepper: function() {
 
             console.log("open the door----------------");
             this.runStepper = true;
 
-            for(var i = 0;i<2;i++){
+            for (var i = 0; i < 2; i++) {
 
                 this.devices.stepper.setSpeed(3000);
-                this.devices.stepper.step(3000);
+                this.devices.stepper.step(1800);
 
             }
-            //every((1).microseconds(),function(){
-            //
-            //    if(!this.runStepper) return  "start the stepper failture";;
-            //    this.devices.stepper.setSpeed(4000);
-            //    this.devices.stepper.step(5);
-            //    //console.log("stepper");
-            //    console.log("one microseconds");
-            //});
+
+
             return 'Cylon ' + this.name + "start the stepper";
-        }),
+        },
         closeStepper:function(){
            this.runStepper = false;
             return 'Cylon ' + this.name + "close the stepper";
@@ -78,40 +72,18 @@ Meteor.startup(
             var analogValue = 0;
             every((1).second(),Meteor.bindEnvironment(  function(){
                 analogValue = my.light.analogRead();
-
-                Meteor.call('sensorValueInsert','bSYQL',analogValue);
-                //sensorValueInsert('bSYQL',analogValue);
-                //var sensorValue = {
-                //    sensor:'bSYQL',
-                //    value:analogValue,
-                //    createdAt:new Date
-                //};
-                //var id = SensorValueCollection.insert(sensorValue);
-                //console.log('the id is'+id);
-
+                // bSYQL
+                Meteor.call('sensorValueInsert','1fUYi',analogValue);
 
                 console.log('Analog value =>',analogValue);
                 //my.redLed.turn_on();
                 my.devices.redLed.toggle();
 
-                //my.devices.stepper.setSpeed(110);
-                //my.devices.stepper.step(100);
-                //
                 console.log("stepper");
 
             }), function( error) {console.log( error);} );
 
-            //my.devices.stepper.on();
-            //this.startStepper();
 
-            every((1).microseconds(),function(){
-
-                if(!this.runStepper) return;
-                my.devices.stepper.setSpeed(4000);
-                my.devices.stepper.step(5);
-                //console.log("stepper");
-                console.log("one microseconds");
-            });
 
             my.light.on('lowerLimit', function(val) {
                 console.log("Lower limit reached!");
@@ -133,15 +105,9 @@ Meteor.startup(
     }).start();
 
 }
-    //, function( error) {console.log( error);}
 
 
 );
-
-//my.devices.stepper.setSpeed(4000);
-//my.devices.stepper.step(-2000);
-//my.devices.stepper.setSpeed(4000);
-//my.devices.stepper.step(2000);
 
 
 sensorValueInsert = function(url,svalue){
