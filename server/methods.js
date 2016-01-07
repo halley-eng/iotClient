@@ -26,43 +26,28 @@ Meteor.methods({
         }
         console.log("open the light  light !!!!!!!!!!!!!!!");
     },
+    zig_fan:function(status){
+
+        if(status){
+            serialPort.write(":EB01SDO0001");
+
+        }else{
+            serialPort.write(":EB01SDO0000");
+
+
+        }
+
+    },
     sendEmail:function(){
 
 
         Email.send({
             to: 'llwoll@126.com',
             from: 'hailiangwin@gmail.com',
-            subject: 'hello',
-            text: 'tiantianxiangshang'
+            subject: '有人闖入請注意！！！！！',
+            text: '中華家居小組提醒您，你加有人闖入！！！'
         });
-
     }
-    //,
-    //sendEmail: function (to, from, subject, text) {
-        //check([to, from, subject, text], [String]);
-
-        // Let other method calls from the same client start running,
-        // without waiting for the email sending to complete.
-        //this.unblock();
-        //
-        //
-        //Meteor.Mailgun.send({
-        //    to: to,
-        //    from: from,
-        //    subject: subject,
-        //    text: text
-        //    //,
-        //    //html: mailFields.html
-        //});
-
-        //Email.send({
-        //    to: to,
-        //    from: from,
-        //    subject: subject,
-        //    text: text
-        //});
-    //}
-
 
 });
 

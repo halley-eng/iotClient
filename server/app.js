@@ -3,25 +3,6 @@
  */
 
 
-//
-//Meteor.startup(function(){
-//    Meteor.Mailgun.config({
-//        username: 'llwoll@126.com',
-//        password: '9579llwoll'
-//    });
-//});
-
-
-//sensorValueInsert('5U7S0',Random.fraction()*20+50);
-
-//for (var i = 1;i<5;i++){
-////Meteor.sleep(500);
-//var flag = Random.fraction()*100;
-//if (flag<5){
-//    sensorValueInsert('5U7S0',Random.fraction()*20+50);
-//}
-//}
-
 
 serialPort = new SerialPort.SerialPort('/dev/cu.usbmodem1421', {
     baudrate: 9600,
@@ -60,10 +41,44 @@ serialPort.on('data', Meteor.bindEnvironment(function(data) {
         //sensorValueInsert('DriTL',message.value2);
     //}
 
+    /*
+        气体与光照和风扇
+     */
+    if (message.nodeid == 'DF4C')
+        if(message.tongdao == '1000'){
+            //    ehCQ7  1fUYi
+            var  v = parseFloat(message.value2)*100;
+            Meteor.call('sensorValueInsert',"14Ir6", v);
+            if(v>160){
+                Meteor.call("zig_fan",false);
+                //Meteor.call("zig_light",false);
+            }else
+            if(v>10)
+            {
+                //Meteor.call("zig_light",true);
+                Meteor.call("zig_fan",true);
+            }
+        }
+
+
+
+
+
+    /*
+        光照与灯光的自动控制
+     */
     if (message.nodeid == 'E428')
      if(message.tongdao == '1000'){
      //    ehCQ7  1fUYi
-        //Meteor.call('sensorValueInsert','qIv5E', parseFloat(message.value2)*100);
+         var  v = parseFloat(message.value2)*100;
+        //Meteor.call('sensorValueInsert',"IMVO8", v);
+         if(v<60){
+             Meteor.call("zig_light",false);
+         }
+         if(v>150)
+         {
+             Meteor.call("zig_light",true);
+         }
      }
 
     if (message.nodeid == 'F59A')
@@ -71,21 +86,25 @@ serialPort.on('data', Meteor.bindEnvironment(function(data) {
             //    ehCQ7  1fUYi
             //较低的时候 表示有人 要发邮件报警
             var v = parseFloat(message.value2)*100;
-            if (v<100){
-                //Meteor.call("sendEmail",'llwoll@126.com','hailiangwin@gmail.com',"hello,llwoll","现在有人闯入你的家里面哦");
-
-                //Meteor.call('sendEmail',{
-                //    to: 'llwoll@126.com',
-                //    from: 'hailiangwin@gmail.com',
-                //    subject: 'I really like sending emails with Mailgun!',
-                //    text: 'Mailgun is totally awesome for sending emails!',
-                //    html: 'With meteor it&apos;s easy to set up <strong>HTML</strong> <span style="color:red">emails</span> too.'
-                //});
-
-            }
-
+            //Meteor.call('sensorValueInsert','vjIfO',v);
+            //if (v<100){
+            //    Meteor.call("sendEmail",'llwoll@126.com','hailiangwin@gmail.com',"hello,llwoll","现在有人闯入你的家里面哦");
+            //}
         }
 
+    //温度监测自动启动风扇
+    if (message.nodeid == '9AF7')
+        if(message.tongdao == '0010'){
+            //    ehCQ7  1fUYi
+            //较低的时候 表示有人 要发邮件报警
+            var v = parseFloat(message.value2);
+            //Meteor.call('sensorValueInsert','j_Jte',v);
+            if (v>30){
+                Meteor.call("zig_fan",true);
+            }else{
+                Meteor.call("zig_fan",false);
+            }
+        }
 
 
 
