@@ -3,6 +3,16 @@
  */
 
 
+Template.SensorMsg.onCreated(function () {
+
+    self.autorun(function(){
+        var self = this;
+        self.subscribe("messages");
+    });
+
+
+});
+
 
 Template.SensorMsg.helpers({
     messages:function(){
