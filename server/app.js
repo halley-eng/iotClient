@@ -42,14 +42,14 @@ serialPort.on('data', Meteor.bindEnvironment(function(data) {
     //}
 
     /*
-        气体与光照和风扇
+        气体与光照和风扇 DF4C
      */
-    if (message.nodeid == 'DF4C')
+    if (message.nodeid == 'F59_A')
         if(message.tongdao == '1000'){
             //    ehCQ7  1fUYi
             var  v = parseFloat(message.value2)*100;
             Meteor.call('sensorValueInsert',"14Ir6", v);
-            if(v>160){
+            if(v>120){
                 Meteor.call("zig_fan",false);
                 //Meteor.call("zig_light",false);
             }else
@@ -71,7 +71,7 @@ serialPort.on('data', Meteor.bindEnvironment(function(data) {
      if(message.tongdao == '1000'){
      //    ehCQ7  1fUYi
          var  v = parseFloat(message.value2)*100;
-        //Meteor.call('sensorValueInsert',"IMVO8", v);
+        Meteor.call('sensorValueInsert',"IMVO8", v);
          if(v<60){
              Meteor.call("zig_light",false);
          }
@@ -86,10 +86,10 @@ serialPort.on('data', Meteor.bindEnvironment(function(data) {
             //    ehCQ7  1fUYi
             //较低的时候 表示有人 要发邮件报警
             var v = parseFloat(message.value2)*100;
-            //Meteor.call('sensorValueInsert','vjIfO',v);
-            //if (v<100){
-            //    Meteor.call("sendEmail",'llwoll@126.com','hailiangwin@gmail.com',"hello,llwoll","现在有人闯入你的家里面哦");
-            //}
+            Meteor.call('sensorValueInsert','vjIfO',v);
+            if (v<25){
+                Meteor.call("sendEmail",'llwoll@126.com','hailiangwin@gmail.com',"hello,llwoll","现在有人闯入你的家里面哦");
+            }
         }
 
     //温度监测自动启动风扇
@@ -98,13 +98,25 @@ serialPort.on('data', Meteor.bindEnvironment(function(data) {
             //    ehCQ7  1fUYi
             //较低的时候 表示有人 要发邮件报警
             var v = parseFloat(message.value2);
-            //Meteor.call('sensorValueInsert','j_Jte',v);
+            Meteor.call('sensorValueInsert','j_Jte',v);
             if (v>30){
-                Meteor.call("zig_fan",true);
+                //Meteor.call("zig_fan",true);
             }else{
-                Meteor.call("zig_fan",false);
+                //Meteor.call("zig_fan",false);
             }
         }
+
+
+    //湿度折线图显示
+    //uP7W1
+    if (message.nodeid == 'CAEC')
+        if(message.tongdao == '0100'){
+            //    ehCQ7  1fUYi
+            var v = parseFloat(message.value2);
+            Meteor.call('sensorValueInsert','uP7W1',v);
+        }
+
+
 
 
 
@@ -139,7 +151,7 @@ function sensorValueInsert(url,svalue){
         value:svalue,
         createdAt:new Date
     };
-    //SensorValueCollection.insert(sensorValue);
+    SensorValueCollection.insert(sensorValue);
 };
 
 
